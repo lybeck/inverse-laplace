@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.11.11)  4 MAR 2014 14:19
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.11.11)  5 MAR 2014 15:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -100,12 +100,24 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks21
+\thm@bodyfont=\toks22
+\thm@headfont=\toks23
+\thm@notefont=\toks24
+\thm@headpunct=\toks25
+\thm@preskip=\skip46
+\thm@postskip=\skip47
+\thm@headsep=\skip48
+\dth@everypar=\toks26
+)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks21
+\KV@toks@=\toks27
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
@@ -116,14 +128,24 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: dvips.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
-File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count99
 ))
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
 )
+\c@theorem=\count100
+
 
 LaTeX Warning: Unused global option(s):
     [a4].
@@ -131,32 +153,39 @@ LaTeX Warning: Unused global option(s):
 (./lybeck-laplacereport.aux)
 \openout1 = `lybeck-laplacereport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count101
+\scratchdimen=\dimen114
+\scratchbox=\box28
+\nofMPsegments=\count102
+\nofMParguments=\count103
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count104
+\MPscratchDim=\dimen115
+\MPnumerator=\count105
+\makeMPintoPDFobject=\count106
+\everyMPtoPDFconversion=\toks29
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
@@ -189,49 +218,61 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
 
-Package epstopdf Warning: Drivers other than `pdftex.def' are not supported.
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    Try loading font information for U+msa on input line 24.
 
-)
-LaTeX Font Info:    Try loading font information for U+msa on input line 20.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 20.
+LaTeX Font Info:    Try loading font information for U+msb on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] (./lybeck-laplacer
-eport.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+<img/laplace.png, id=30, 449.68pt x 337.26pt>
+File: img/laplace.png Graphic file (type png)
+ <use img/laplace.png>
+Package pdftex.def Info: img/laplace.png used on input line 138.
+(pdftex.def)             Requested size: 269.81007pt x 202.35756pt.
+ [4 <./img/laplace.png (PNG copy)>] [5] [6] (./lybeck-laplacereport.aux) ) 
 Here is how much of TeX's memory you used:
- 1912 strings out of 494468
- 24416 string characters out of 6166394
- 82604 words of memory out of 5000000
- 5130 multiletter control sequences out of 15000+600000
- 16192 words of font info for 50 fonts, out of 8000000 for 9000
+ 2506 strings out of 494468
+ 32464 string characters out of 6166394
+ 93855 words of memory out of 5000000
+ 5704 multiletter control sequences out of 15000+600000
+ 18498 words of font info for 53 fonts, out of 8000000 for 9000
  350 hyphenation exceptions out of 8191
- 37i,17n,24p,395b,203s stack positions out of 5000i,500n,10000p,200000b,80000s
- </tmp/texfonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </tmp/texfont
-s/pk/ljfour/jknappen/ec/ecti1200.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ec
-rm1200.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </tmp/texfon
-ts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/e
-crm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cme
-x10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/symbols/msbm10.pfb>
-Output written on lybeck-laplacereport.pdf (3 pages, 147235 bytes).
+ 37i,17n,24p,459b,264s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </tm
+p/texfonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </tmp/texfonts/pk/ljfour/jknap
+pen/ec/ecbx1440.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </t
+mp/texfonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </tmp/texfonts/pk/ljfour/jkna
+ppen/ec/ecbx1728.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </
+tmp/texfonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on lybeck-laplacereport.pdf (6 pages, 169791 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 65 compressed objects within 1 object stream
+ 295 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

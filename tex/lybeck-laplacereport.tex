@@ -2,13 +2,17 @@
 
 \usepackage{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath,amsfonts}
-\usepackage[dvips]{graphicx}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{graphicx}
 
 \newcommand{\R}{{\mathbb R}}
 \newcommand{\C}{{\mathbb C}}
 \newcommand{\N}{{\mathbb N}}
 \newcommand{\ra}{\rightarrow}
+\newcommand{\eps}{\varepsilon}
+
+\newtheorem{theorem}{Theorem}
+
 
 
 \title{Inversion of the Laplace transform}
@@ -29,13 +33,63 @@ provided that the integral converges.
 
 The transform has many applications in physical sciences and is therefore widely used and studied. One example of the usage of the transform is in linear differential equations, which may in some cases be easily solved using the Laplace transform.
 
-The direct problem is to determine $F$ for a given function $f$ according to (\ref{laplace}). The inverse problem is: {\em given a Laplace transform $F$, find the corresponding function $f$.} In this study we will be looking at the inverse problem from the computational point of view.
+The direct problem is to determine $F$ for a given function $f$ according to (\ref{laplace}). The inverse problem is: {\em given a Laplace transform $F$, find the corresponding function $f$.} In this study we will be looking at the inverse problem from the computational point of view. We will notice that the inverse problem is ill-posed and not at all trivial.
+
 
 
 
 \section{Materials and Methods}\label{sec:methods}
 
-\subsection{The matrix model}
+\subsection{Theoretical basis}
+
+In this study we will solve the inverse problem with the \emph{truncated singular value decomposition} method. In the future we will refer to the singular value decompostition as SVD. Let us first revise the theory for the SVD and the pseudoinverse.
+
+\subsubsection{Singular value decomposition and the pseudoinverse}
+
+The truncated SVD method is based on the fact that every matrix $A \in \R^{m \times n}$ can be decomposed into the product of three matrices
+\begin{equation}
+A = U D V^T,
+\end{equation}
+where $U$ and $V$ are orthogonal matrices and $D$ is a diagonal matrix. The diagonal elements $d_{i,i}$, $i = 1, \ldots , min \left\{ m,n \right\}$ of $D$ are called the \emph{singular values of $D$}.
+
+The \emph{pseudoinverse} of $A$ (denoted as $A^+$) can be calculated via the SVD of $A$. Due to the fact that $U$ and $V$ are orthogonal, we know that $U^T = U^{-1}$ and $V^T = V^{-1}$. We define the pseudoinverse of the diagonal matrix $D \in \R^{m \times n}$ as the diagonal matrix $D^+ \in \R^{n \times m}$ where the diagonal elements have the values
+\begin{equation}
+D^+_{i,i} =
+\begin{cases}
+    1 / d_{i,i} & \text{if }d_{i,i} \neq 0 \\
+    0           & \text{otherwise}.
+\end{cases}
+\end{equation}
+Now we can define the pseudoinverse of $A$ as 
+\begin{equation}\label{pseudo}
+A^+ = V D^+ U^T .
+\end{equation}
+
+If $A \in \R^{n \times n}$ is invertible we notice that $A^+ = A^{-1}$. As it is easily shown that $D D^+ = D^+ D = I$ we get
+\begin{equation}
+A A^+ = U D \underbrace{V^T V}_{= I}  D^+ U = U \underbrace{D D^+}_{= I} U^T = U U^T = I
+\end{equation}
+and in a similar manner
+\begin{equation}
+A^+ A = V D^+ U^T U D V^T = V D^+ D V = V V^T = I ,
+\end{equation}
+and thus we see that $A^+ = A^{-1}$. This is however often not the case.
+
+In the case of linear systems $Af = m$ we get the least squares solution easily with the pseudo inverse of $A$. The following result is shown in the work \cite{samu}, and we will not be proving it here. Notice that in the case of the following theorem $A$ need not be invertible, for example if $A \in \R^{m \times n}$, where $m > n$.
+
+\begin{theorem}
+Let $A \in \R^{m \times n}$. The minimum norm solution of the linear system $Af = m$ is given by $A^+ m$.
+\end{theorem}
+\begin{proof}
+See \cite{samu} theorem 4.1.
+\end{proof}
+
+
+\subsubsection{Truncated singular value decomposition}
+
+Although we have shown that linear systems $Af = m$ can easily be solved with the pseudoinverse of the coefficient matrix $A$, this will not always be the proper way of solving inverse problems of the same type.
+
+\subsection{The matrix model}\label{sec:matrixmodel}
 
 Assume we know the values of $F$ at these real-valued points:
 $$
@@ -58,42 +112,53 @@ A = \frac{t_k}{k}\begin{bmatrix} \frac{1}{2}e^{-s_1t_1} & e^{-s_1t_2} & e^{-s_1t
 
 \subsection{The inversion method}
 
-In this study we will solve the inverse problem with the truncated singular value decomposition (henceforth referred to as SVD) method. This method is based on the fact that every matrix $A \in \R^{n \times m}$ can be decomposed into the product of three matrices
-\begin{equation}
-A = U D V^T,
-\end{equation}
-where $U$ and $V$ are orthogonal matrices and $D$ is a diagonal matrix. The diagonal elements $d_{i,i}$, $i = 1, \ldots , min \left\{ n,m \right\}$ of $D$ are called the \emph{singular values of $D$}.
+As the materials for this study we have created MATLAB code for calculating the inverse Laplace transform with the truncated SVD method. The starting point for out experiments is as follows.
 
-The \emph{pseudoinverse} of $A$ (denoted as $A^+$) can be calculated via the SVD of $A$. Due to the fact that $U$ and $V$ are orthogonal, we know that $U^T = U^{-1}$ and $V^T = V^{-1}$. We define the pseudoinverse of the diagonal matrix $D \in \R^{n \times m}$ as the diagonal matrix $D^+ \in \R^{m \times n}$ where the diagonal elements have the values
-\begin{equation}
-D^+_{i,i} =
+The measurements were done with the function $f: \left[ 0, \infty \right[ \ra \R$,
+\begin{equation}\label{eq:f}
+f(t) = 
 \begin{cases}
-    1 / d_{i,i} & d_{i,i} \neq 0 \\
-    0           & otherwise.
+1, & \text{for } 0 \leq t \leq 1 \\
+0, & \text{otherwise}.
 \end{cases}
 \end{equation}
+
+The matrix $A$ and vectors $s$ and $t$ are defined as explained in section \ref{sec:matrixmodel}. The values of $s_i$ of the vector $s \in \R^n$ were randomly chosen in the interval $\left] 0, 100 \right[$. The values $t_j$ for the vector $t \in \R^k$ were chosen evenly spaced in the interval $\left[ 0,3 \right]$. The values of $n$ and $k$ were varied in the experiments to determine their effect on the results.
+
+We then created the measurement points $m = [m_1, m_2, \ldots, m_n]^T + \eps$, where $m_i = F(s_i)$, $F$ is defined as in \eqref{laplace} for the function $f$ and $\eps$ is some random noise.
+
+The reconstruction $T_\alpha(m)$ from the measurement data $m$ of the function $f$ in the interval $\left[0,1\right]$ could then be calculated with the truncated SVD method with $\alpha$ as the regularization parameter. The results were then recorded with different choises of $\alpha$.
+
 
 
 \section{Results}\label{sec:results}
 
-{\em The Results section is for a detailed explanation of what happens when the methods of Section \ref{sec:methods} are applied to the materials. There should be no interpretation of what the results might mean, just a dry and factual report with numbers, charts and plots.}
+\begin{figure}[t]
+\begin{center}
+\includegraphics[scale=.6]{img/laplace.png}
+\end{center}
+\caption{Laplace transform of $f$}
+\label{fig:laplace}
+\end{figure}
+
+The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in figure \ref{fig:laplace}. The measurement data used in the inversion of the Laplace transform will be similar to what is seen in the figure, but with added noise and on a bigger interval.
 
 
-\begin{itemize}
-\item[(a)] Compute numerically and plot the Laplace transform of 
-$$
-  f(t) = \left\{\begin{array}{ll}1,&\mbox{ for }0\leq t \leq 1,\\0, &\mbox{ otherwise.}\end{array}\right.
-$$
-
-\item[(b)] Construct matrix $A$ given by (\ref{LaplaceA}) for a suitable choice of points $t_\ell$ and $s_j$. Compute the singular values of $A$. Do you detect ill-posedness?
-
-\item[(c)] Use truncated SVD to compute the inverse Laplace transform of $f$.
-\end{itemize}
 
 
 \section{Discussion}
 
 {\em This section is for interpretations of the results presented in Section \ref{sec:results}. Sometimes this section is called Conclusions, or Discussion and Conclusions.}
+
+
+\newpage
+\begin{thebibliography}{9}
+
+\bibitem{samu}
+Mueller, Jennifer L., ; Siltanen, Samuli \\
+\emph{Linear and nonlinear inverse problems with practical applications} \\ Philadelphia : SIAM, 2012. - (Computational science \& engineering.)
+
+\end{thebibliography}
 
 \end{document}
 
