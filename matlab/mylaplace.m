@@ -1,14 +1,15 @@
+% MYLAPLACE Returns the Laplace transform of the function defined in the
+% home exam
+%
+%   y = MYLAPLACE(s) Returns the Laplace transform evaluated at the points
+%   of the vector s.
+%
+% Author: Lasse Lybeck
 function y = mylaplace(s)
-
-load constant.mat k
-
-% t = linspace(0,1,k);
 
 y = zeros(size(s));
 for ii = 1:length(s)
-   x = s(ii);
-   y(ii) = quad(@(t) exp(-x*t), 0, 1);
-%    y(ii) = (.5 * exp(-x*t(1)) + sum(exp(-x*t(2:end-1))) + .5 * exp(-x*t(end))) / k;
+   y(ii) = quad(@(t) exp(-s(ii)*t), 0, 1);
 end
 
 end
