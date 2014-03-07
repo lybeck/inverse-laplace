@@ -7,9 +7,6 @@
 % Author: Lasse Lybeck
 function y = mylaplace(s)
 
-y = zeros(size(s));
-for ii = 1:length(s)
-   y(ii) = quad(@(t) exp(-s(ii)*t), 0, 1);
-end
+y = (1 - exp(-s)) ./ s;
 
 end
