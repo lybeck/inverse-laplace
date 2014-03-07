@@ -42,7 +42,7 @@ The direct problem is to determine $F$ for a given function $f$ according to (\r
 
 \subsection{Theoretical basis}
 
-In this study we will solve the inverse problem with the \emph{truncated singular value decomposition} method. In the future we will refer to the singular value decompostition as SVD. Let us first revise the theory for the SVD and the pseudoinverse.
+In this study we will solve the inverse problem with the \emph{truncated singular value decomposition} method. In the future we will refer to the singular value decomposition as SVD. Let us first revise the theory for the SVD and the pseudoinverse.
 
 \subsubsection{Singular value decomposition and the pseudoinverse}
 
@@ -123,11 +123,19 @@ f(t) =
 \end{cases}
 \end{equation}
 
-The matrix $A$ and vectors $s$ and $t$ are defined as explained in section \ref{sec:matrixmodel}. The values of $s_i$ of the vector $s \in \R^n$ were randomly chosen in the interval $\left] 0, 100 \right[$. The values $t_j$ for the vector $t \in \R^k$ were chosen evenly spaced in the interval $\left[ 0,3 \right]$. The values of $n$ and $k$ were varied in the experiments to determine their effect on the results.
+The matrix $A$ and vectors $s$ and $t$ are defined as explained in section \ref{sec:matrixmodel}. The values of $s_i$ of the vector $s \in \R^n$ and $t_j$ of the vector $t \in \R^k$ were chosen evenly spaced from the intervals $\left] 0, 100 \right[$ and $\left[ 0,3 \right]$, respectively. The values of $n$ and $k$ were varied in the experiments to determine their effect on the results.
+
+With the specified function $f$ the Laplace transform can be calculated as
+\begin{equation}
+F(s) = \int_0^{\infty} e^{-st} f(t) dt
+     = \int_0^1 e^{-st} dt
+     = \frac{1 - e^{-s}}{s},
+\end{equation}
+and thus the values of the Laplace transform can be easily without using numerical integration methods. This adds both speed and precision to the calculations.
 
 We then created the measurement points $m = [m_1, m_2, \ldots, m_n]^T + \eps$, where $m_i = F(s_i)$, $F$ is defined as in \eqref{laplace} for the function $f$ and $\eps$ is some random noise.
 
-The reconstruction $T_\alpha(m)$ from the measurement data $m$ of the function $f$ in the interval $\left[0,1\right]$ could then be calculated with the truncated SVD method with $\alpha$ as the regularization parameter. The results were then recorded with different choises of $\alpha$.
+The reconstruction $T_\alpha(m)$ from the measurement data $m$ of the function $f$ in the interval $\left[0,3\right]$ could then be calculated with the truncated SVD method with $\alpha$ as the regularization parameter. The results were then recorded with different choices of $\alpha$.
 
 
 
@@ -141,14 +149,38 @@ The reconstruction $T_\alpha(m)$ from the measurement data $m$ of the function $
 \label{fig:laplace}
 \end{figure}
 
-The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in figure \ref{fig:laplace}. The measurement data used in the inversion of the Laplace transform will be similar to what is seen in the figure, but with added noise and on a bigger interval.
+\begin{figure}[t]
+\begin{center}
+\includegraphics[scale=.6]{img/singular.png}
+\end{center}
+\caption{Singular values of a Laplace transform matrix}
+\label{fig:singular}
+\end{figure}
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[scale=.6]{img/cond.png}
+\end{center}
+\caption{Condition numbers of $k \times k$ Laplace transform matrices}
+\label{fig:cond}
+\end{figure}
+
+The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in figure \ref{fig:laplace}. The measurement data used in the inversion of the Laplace transform will be similar to what is seen in the figure, but with added noise and on a wider interval.
+
+In figure \ref{fig:singular} the singular values are shown for a certain Laplace transform matrix $A$. The matrix is constructed with the vectors $t \in \R^k$ and $s \in \R^n$, with the values $k = 1000$ and $n = 300$. The condition number for the matrix is, as shown in the figure, about
+\begin{equation}
+\text{cond}(A) \approx 8.6407 \cdot 10^{17}.
+\end{equation}
+
 
 
 
 
 \section{Discussion}
 
-{\em This section is for interpretations of the results presented in Section \ref{sec:results}. Sometimes this section is called Conclusions, or Discussion and Conclusions.}
+\subsection{Ill-posedness}
+
+As it can be seen from figure \ref{fig:singular}, the singular values of the coefficient matrix are decreasing very rapidly (notice the logarithmic scale on the y-axis). This results in high condition numbers and therefore in systems with high sensibility for noise. As it can further be seen from figure \ref{fig:cond}, the condition number greatly increases as the size of the matrix increases (again, notice the logarithmic scale). These results clearly point to the fact that the inverse Laplace transform is an ill-posed problem.
 
 
 \newpage
