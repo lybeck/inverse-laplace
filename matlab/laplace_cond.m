@@ -26,17 +26,16 @@ fontsz = 14;
 
 % the singular values and condition number of A
 d = svd(A);
-cnd = cond(A);
 
 % plot the singular values
 figure(1)
 clf
-semilogy(d, 'k-')
+semilogy(d, 'k-', 'linewidth', 2)
 grid on
 title('Singular values of the Laplace transform matrix', 'fontsize', fontsz)
 xlabel('Index of singular value', 'fontsize', fontsz)
 ylabel('Singular value', 'fontsize', fontsz)
-text(103, 2e-5, sprintf('Condition number: %e', cnd), 'fontsize', fontsz)
+% text(103, 2e-5, sprintf('Condition number: %e', cond(A)), 'fontsize', fontsz)
 
 
 k = 1:500;

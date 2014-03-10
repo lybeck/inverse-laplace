@@ -53,5 +53,5 @@ clf
 plot(t, f, 'b-', t, rec, 'k--', 'linewidth', 2)
 axis([0 maxt -1 2])
 grid on
-title('Reconstruction of function with inverse Laplace transform', 'fontsize', fontsz)
+title('Reconstruction with the inverse Laplace transform', 'fontsize', fontsz)
 legend('Function', 'Reconstruction')
