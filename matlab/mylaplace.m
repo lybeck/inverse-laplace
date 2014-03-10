@@ -2,13 +2,11 @@
 % home exam
 %
 %   y = MYLAPLACE(s) Returns the Laplace transform evaluated at the points
-%   of the vector s.
+%   of the vector s. Elements of s should be strictly positive.
 %
 % Author: Lasse Lybeck
 function y = mylaplace(s)
 
 y = (1 - exp(-s)) ./ s;
-
-y(s == 0) = 1;
 
 end

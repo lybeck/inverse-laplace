@@ -15,8 +15,11 @@ maxt = 3;
 noise_lvl = 1e-5;
 
 % data
-s = linspace(0, maxs, n)';
+s = linspace(0, maxs, n + 1)';
 t = linspace(0, maxt, k)';
+
+% discard s = 0
+s = s(2:end);
 
 % Laplace transform matrix and function values
 [A, f] = laplace_mat(s, t);
