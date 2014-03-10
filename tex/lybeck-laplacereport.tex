@@ -10,6 +10,7 @@
 \newcommand{\N}{{\mathbb N}}
 \newcommand{\ra}{\rightarrow}
 \newcommand{\eps}{\varepsilon}
+\newcommand{\cond}{\ensuremath{\text{cond}}}
 
 \newtheorem{theorem}{Theorem}
 
@@ -45,14 +46,15 @@ The direct problem is to determine $F$ for a given function $f$ according to (\r
 In this study we will solve the inverse problem with the \emph{truncated singular value decomposition} method. In the future we will refer to the singular value decomposition as SVD. Let us first revise the theory for the SVD and the pseudoinverse.
 
 \subsubsection{Singular value decomposition and the pseudoinverse}
+\label{sec:svd}
 
-The truncated SVD method is based on the fact that every matrix $A \in \R^{m \times n}$ can be decomposed into the product of three matrices
+The truncated SVD method is based on the fact that every matrix $A \in \R^{k \times n}$ can be decomposed into the product of three matrices
 \begin{equation}
 A = U D V^T,
 \end{equation}
-where $U$ and $V$ are orthogonal matrices and $D$ is a diagonal matrix. The diagonal elements $d_{i,i}$, $i = 1, \ldots , min \left\{ m,n \right\}$ of $D$ are called the \emph{singular values of $D$}.
+where $U$ and $V$ are orthogonal matrices and $D$ is a diagonal matrix. The diagonal elements $d_{i,i}$, $i = 1, \ldots , min \left\{ k,n \right\}$ of $D$ are called the \emph{singular values of $D$}.
 
-The \emph{pseudoinverse} of $A$ (denoted as $A^+$) can be calculated via the SVD of $A$. Due to the fact that $U$ and $V$ are orthogonal, we know that $U^T = U^{-1}$ and $V^T = V^{-1}$. We define the pseudoinverse of the diagonal matrix $D \in \R^{m \times n}$ as the diagonal matrix $D^+ \in \R^{n \times m}$ where the diagonal elements have the values
+The \emph{pseudoinverse} of $A$ (denoted as $A^+$) can be calculated via the SVD of $A$. We define the pseudoinverse of the diagonal matrix $D \in \R^{k \times n}$ as the diagonal matrix $D^+ \in \R^{n \times k}$ where the diagonal elements have the values
 \begin{equation}
 D^+_{i,i} =
 \begin{cases}
@@ -65,29 +67,36 @@ Now we can define the pseudoinverse of $A$ as
 A^+ = V D^+ U^T .
 \end{equation}
 
-If $A \in \R^{n \times n}$ is invertible we notice that $A^+ = A^{-1}$. As it is easily shown that $D D^+ = D^+ D = I$ we get
-\begin{equation}
-A A^+ = U D \underbrace{V^T V}_{= I}  D^+ U = U \underbrace{D D^+}_{= I} U^T = U U^T = I
-\end{equation}
-and in a similar manner
-\begin{equation}
-A^+ A = V D^+ U^T U D V^T = V D^+ D V = V V^T = I ,
-\end{equation}
-and thus we see that $A^+ = A^{-1}$. This is however often not the case.
+It can be shown, that if $A$ is an invertible matrix, then $A^+ = A^{-1}$. This is however often not the case.
 
-In the case of linear systems $Af = m$ we get the least squares solution easily with the pseudo inverse of $A$. The following result is shown in the work \cite{samu}, and we will not be proving it here. Notice that in the case of the following theorem $A$ need not be invertible, for example if $A \in \R^{m \times n}$, where $m > n$.
-
-\begin{theorem}
-Let $A \in \R^{m \times n}$. The minimum norm solution of the linear system $Af = m$ is given by $A^+ m$.
-\end{theorem}
-\begin{proof}
-See \cite{samu} theorem 4.1.
-\end{proof}
-
+In the case of linear systems $Af = m$ we get the least squares solution easily with the pseudo inverse of $A$. As it is shown in \cite{samu}, theorem 4.1, the least squares solution to a system $Af = m$, where $A \in \R^{k \times n}$, is given by $A^+ m$. Notice that here $A$ need not be invertible, as it may not even be a square matrix.
 
 \subsubsection{Truncated singular value decomposition}
 
-Although we have shown that linear systems $Af = m$ can easily be solved with the pseudoinverse of the coefficient matrix $A$, this will not always be the proper way of solving inverse problems of the same type.
+Although we now know that linear systems of the type $Af = m$ can easily be solved with the pseudoinverse of the coefficient matrix $A$, this will not always be the proper way of solving inverse problems of the same type. Consider the following case.
+
+Let $m = A f + \eps$, where $\eps$ is some small random noise. It would seem logical that this kind of a problem could be solved approximately with the same method as the problems described earlier with no noise present, as $Af + \eps \approx Af$. This will however not work, as we will come to see later. The reason to this comes from the so called \emph{condition number} of the coefficient matrix $A$.
+
+The condition number of a matrix $A \in \R^{k \times n}$ is defined as the ratio of the largest and smallest singular of $A$. In the case $A$ has an SVD as described in section \ref{sec:svd}, the condition number is defined as $\cond(A) = d_1 / d_{min(k,n)}$.
+
+In the case of ill-posed inverse problems the condition numbers are large and grow as the size of the matrix grows. This is the reason why naive inversion fails for these problems. As the condition number is large, the least singular values are correspondingly very small. This means that for the pseudoinverse $A^+$ the singular values are very large. As we try to calculate the least squares solution with the naive inversion the right side of the equation becomes $A^+ (Af + \eps)$, where we multiply $A^+$ with the noise $\eps$. This leads to a large error, even thou the noise is quite small, as the inverse singular values are often very much larger. This is the reason why naive inversion fails for ill-posed inverse problems.
+
+The truncated SVD is a method that tries to solve this problem by "discarding" the singular values that are regarded as too small. For a \emph{regularization parameter} $\alpha > 0$, the truncated SVD for a matrix $A \in \R^{k \times n}$ in defined in the means of the SVD $A = U D V^T$ as $A_{\alpha} = U D_{\alpha} V^T$, where
+\begin{equation}
+(D_{\alpha})_{i,i} =
+\begin{cases}
+D_{i,i}, & \text{if } D_{i,i} \geq \alpha \\
+0,       & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+Now the least singular value of $A_{\alpha}$ is no smaller that $\alpha$, and the problem with the naive inversion is solved, as long as the regularization parameter can be chosen well enough. We now have a reconstruction function
+\begin{equation}
+R_{\alpha}(m) = A_{\alpha}^+ m = V D_{\alpha} U^T m.
+\end{equation}
+This reconstruction model will be used in this study to solve the inverse Laplace transform. For further reading on truncated SVD, see \cite{samu}, chapter 4.1.
+
+
 
 \subsection{The matrix model}\label{sec:matrixmodel}
 
@@ -169,7 +178,7 @@ The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in fi
 
 In figure \ref{fig:singular} the singular values are shown for a certain Laplace transform matrix $A$. The matrix is constructed with the vectors $t \in \R^k$ and $s \in \R^n$, with the values $k = 1000$ and $n = 300$. The condition number for the matrix is, as shown in the figure, about
 \begin{equation}
-\text{cond}(A) \approx 8.6407 \cdot 10^{17}.
+\cond(A) \approx 8.6407 \cdot 10^{17}.
 \end{equation}
 
 
