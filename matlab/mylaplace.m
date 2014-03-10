@@ -9,4 +9,6 @@ function y = mylaplace(s)
 
 y = (1 - exp(-s)) ./ s;
 
+y(s == 0) = 1;
+
 end

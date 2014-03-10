@@ -20,6 +20,9 @@ for ii = 1:min(size(D))
     trD(ii, ii) = D(ii, ii);
 end
 
+if n == 0
+    n = min(size(D));
+end
 x = V * pinv(trD) * U' * b;
 
 end

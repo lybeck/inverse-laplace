@@ -12,7 +12,7 @@ k = 1000;
 maxt = 3;
 
 % noise level
-noise_lvl = 1e-4;
+noise_lvl = 1e-5;
 
 % data
 s = linspace(0, maxs, n)';

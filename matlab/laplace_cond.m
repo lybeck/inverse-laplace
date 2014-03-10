@@ -47,7 +47,7 @@ end
 
 figure(2)
 clf
-semilogy(k, cnd, 'r.', 'markersize', 10);
+semilogy(k, cnd, 'k.', 'markersize', 10);
 axis([k(1), k(length(k)), 1e18, 1e22])
 title('Condition numbers of the Laplace transform matrix', 'fontsize', fontsz)
 xlabel('Number of rows and columns', 'fontsize', fontsz)
