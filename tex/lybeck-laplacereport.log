@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.11.11)  10 MAR 2014 11:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.11.11)  10 MAR 2014 12:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -239,52 +239,59 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
-<img/laplace.png, id=33, 449.68pt x 337.26pt>
-File: img/laplace.png Graphic file (type png)
- <use img/laplace.png>
-Package pdftex.def Info: img/laplace.png used on input line 155.
-(pdftex.def)             Requested size: 269.81007pt x 202.35756pt.
+<img/laplace_data.png, id=33, 739.563pt x 337.26pt>
+File: img/laplace_data.png Graphic file (type png)
+ <use img/laplace_data.png>
+Package pdftex.def Info: img/laplace_data.png used on input line 155.
+(pdftex.def)             Requested size: 369.7806pt x 168.62958pt.
 
 <img/singular.png, id=34, 449.68pt x 337.26pt>
 File: img/singular.png Graphic file (type png)
  <use img/singular.png>
 Package pdftex.def Info: img/singular.png used on input line 163.
-(pdftex.def)             Requested size: 269.81007pt x 202.35756pt.
+(pdftex.def)             Requested size: 179.8688pt x 134.9016pt.
 
 <img/cond.png, id=35, 449.68pt x 337.26pt>
 File: img/cond.png Graphic file (type png)
  <use img/cond.png>
-Package pdftex.def Info: img/cond.png used on input line 171.
-(pdftex.def)             Requested size: 269.81007pt x 202.35756pt.
- [5 <./img/laplace.png (PNG copy)>] [6 <./img/singular.png (PNG copy)>] [7 <./i
-mg/cond.png (PNG copy)>] (./lybeck-laplacereport.aux) ) 
+Package pdftex.def Info: img/cond.png used on input line 164.
+(pdftex.def)             Requested size: 179.8688pt x 134.9016pt.
+
+
+LaTeX Warning: Reference `fig:cond' on page 5 undefined on input line 182.
+
+[5 <./img/laplace_data.png (PNG copy)>] [6 <./img/singular.png (PNG copy)> <./i
+mg/cond.png (PNG copy)>] [7] (./lybeck-laplacereport.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
  2519 strings out of 494468
- 32667 string characters out of 6166394
- 93895 words of memory out of 5000000
+ 32692 string characters out of 6166394
+ 93887 words of memory out of 5000000
  5716 multiletter control sequences out of 15000+600000
  18498 words of font info for 53 fonts, out of 8000000 for 9000
  350 hyphenation exceptions out of 8191
  37i,17n,24p,760b,264s stack positions out of 5000i,500n,10000p,200000b,80000s
- </tmp/texfonts/pk/ljfou
-r/jknappen/ec/ecbx1200.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecbx1440.600
-pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </tmp/texfonts/pk/ljfo
-ur/jknappen/ec/ecrm1200.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecbx1728.60
-0pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </tmp/texfonts/pk/ljf
-our/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/symbols/msbm10.pfb>
-Output written on lybeck-laplacereport.pdf (7 pages, 190917 bytes).
+ </tmp/texfonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </tmp/texfonts/pk/ljfou
+r/jknappen/ec/ecbx1440.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecti1200.600
+pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </tmp/texfonts/pk/ljfo
+ur/jknappen/ec/ecbx1728.600pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecrm1440.60
+0pk> </tmp/texfonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on lybeck-laplacereport.pdf (7 pages, 194268 bytes).
 PDF statistics:
- 300 PDF objects out of 1000 (max. 8388607)
+ 302 PDF objects out of 1000 (max. 8388607)
  79 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)

@@ -152,34 +152,24 @@ The reconstruction $T_\alpha(m)$ from the measurement data $m$ of the function $
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[scale=.6]{img/laplace.png}
+\includegraphics[scale=.5]{img/laplace_data.png}
 \end{center}
-\caption{Laplace transform of $f$}
+\caption{Left: Laplace transform of $f$. Right: An example of synthetic data used in the experiments.}
 \label{fig:laplace}
 \end{figure}
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[scale=.6]{img/singular.png}
+\includegraphics[scale=.4]{img/singular.png}
+\includegraphics[scale=.4]{img/cond.png}
 \end{center}
-\caption{Singular values of a Laplace transform matrix}
+\caption{Left: Singular values of a Laplace transform matrix. Right: Condition numbers of $k \times k$ Laplace transform matrices}
 \label{fig:singular}
 \end{figure}
 
-\begin{figure}[t]
-\begin{center}
-\includegraphics[scale=.6]{img/cond.png}
-\end{center}
-\caption{Condition numbers of $k \times k$ Laplace transform matrices}
-\label{fig:cond}
-\end{figure}
+The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in figure \ref{fig:laplace}. An example of the synthetic measurement data used in the inversion of the Laplace transform can be seen in the right hand side plot in the same figure.
 
-The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in figure \ref{fig:laplace}. The measurement data used in the inversion of the Laplace transform will be similar to what is seen in the figure, but with added noise and on a wider interval.
-
-In figure \ref{fig:singular} the singular values are shown for a certain Laplace transform matrix $A$. The matrix is constructed with the vectors $t \in \R^k$ and $s \in \R^n$, with the values $k = 1000$ and $n = 300$. The condition number for the matrix is, as shown in the figure, about
-\begin{equation}
-\cond(A) \approx 8.6407 \cdot 10^{17}.
-\end{equation}
+In the left hand side plot in figure \ref{fig:singular} the singular values are shown for a certain Laplace transform matrix $A$. The matrix is constructed with the vectors $t \in \R^k$ and $s \in \R^n$, with the values $k = 1000$ and $n = 300$. The condition number for the matrix is, as shown in the figure, $\cond(A) \approx 8.6407 \cdot 10^{17}$. In the right hand side plot is shown the condition number for a collection of square Laplace transform matrices. The side of the square matrices in the plot ranges from $1$ to $500$.
 
 
 
