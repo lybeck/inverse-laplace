@@ -12,8 +12,6 @@
 \newcommand{\eps}{\varepsilon}
 \newcommand{\cond}{\ensuremath{\text{cond}}}
 
-\newtheorem{theorem}{Theorem}
-
 
 
 \title{Inversion of the Laplace transform}
@@ -92,7 +90,7 @@ D_{i,i}, & \text{if } D_{i,i} \geq \alpha \\
 
 Now the least singular value of $A_{\alpha}$ is no smaller that $\alpha$, and the problem with the naive inversion is solved, as long as the regularization parameter can be chosen well enough. We now have a reconstruction function
 \begin{equation}
-R_{\alpha}(m) = A_{\alpha}^+ m = V D_{\alpha} U^T m.
+T_{\alpha}(m) = A_{\alpha}^+ m = V D_{\alpha} U^T m.
 \end{equation}
 This reconstruction model will be used in this study to solve the inverse Laplace transform. For further reading on truncated SVD, see \cite{samu}, chapter 4.1.
 
@@ -120,6 +118,7 @@ A = \frac{t_k}{k}\begin{bmatrix} \frac{1}{2}e^{-s_1t_1} & e^{-s_1t_2} & e^{-s_1t
 
 
 \subsection{The inversion method}
+\label{sec:invmethod}
 
 As the materials for this study we have created MATLAB code for calculating the inverse Laplace transform with the truncated SVD method. The starting point for out experiments is as follows.
 
@@ -132,7 +131,7 @@ f(t) =
 \end{cases}
 \end{equation}
 
-The matrix $A$ and vectors $s$ and $t$ are defined as explained in section \ref{sec:matrixmodel}. The values of $s_i$ of the vector $s \in \R^n$ and $t_j$ of the vector $t \in \R^k$ were chosen evenly spaced from the intervals $\left] 0, 100 \right[$ and $\left[ 0,3 \right]$, respectively. The values of $n$ and $k$ were varied in the experiments to determine their effect on the results.
+The matrix $A$ and vectors $s$ and $t$ are defined as explained in section \ref{sec:matrixmodel}. The values of $s_i$ of the vector $s \in \R^n$ and $t_j$ of the vector $t \in \R^k$ were chosen evenly spaced from the intervals $\left] 0, 100 \right[$ and $\left[ 0,3 \right]$, respectively. The values of $n$ and $k$ were varied in the experiments to determine their effect on the condition of the coefficient matrix. In the recorded reconstructions the values were $n = 300$ and $k = 1000$.
 
 With the specified function $f$ the Laplace transform can be calculated as
 \begin{equation}
@@ -142,7 +141,7 @@ F(s) = \int_0^{\infty} e^{-st} f(t) dt
 \end{equation}
 and thus the values of the Laplace transform can be easily without using numerical integration methods. This adds both speed and precision to the calculations.
 
-We then created the measurement points $m = [m_1, m_2, \ldots, m_n]^T + \eps$, where $m_i = F(s_i)$, $F$ is defined as in \eqref{laplace} for the function $f$ and $\eps$ is some random noise.
+We then created the measurement points $m = [m_1, m_2, \ldots, m_n]^T + \eps$, where $m_i = F(s_i)$, $F$ is defined as in \eqref{laplace} for the function $f$ and $\eps$ is some random normally distributed noise. The noise used in the reconstruction had the standard deviation of $1 \cdot 10^{-5}$.
 
 The reconstruction $T_\alpha(m)$ from the measurement data $m$ of the function $f$ in the interval $\left[0,3\right]$ could then be calculated with the truncated SVD method with $\alpha$ as the regularization parameter. The results were then recorded with different choices of $\alpha$.
 
@@ -167,19 +166,65 @@ The reconstruction $T_\alpha(m)$ from the measurement data $m$ of the function $
 \label{fig:singular}
 \end{figure}
 
+\begin{table}
+\begin{center}
+\begin{tabular}[t]{|c|c|c|}
+\hline
+Regularization parameter $\alpha$ & Singular values & Relative error
+\\ \hline
+$1 \cdot 10^{-1}$  &  1    & 63.9              \% \\ \hline
+$1 \cdot 10^{-2}$  &  5    & 36.2              \% \\ \hline
+$1 \cdot 10^{-3}$  &  8    & 27.4              \% \\ \hline
+$1 \cdot 10^{-4}$  &  10   & 25.2              \% \\ \hline
+$1 \cdot 10^{-5}$  &  13   & 21.8              \% \\ \hline
+$1 \cdot 10^{-6}$  &  15   & 25.9              \% \\ \hline
+$1 \cdot 10^{-7}$  &  17   & 284               \% \\ \hline
+$1 \cdot 10^{-8}$  &  20   & 3904              \% \\ \hline
+$1 \cdot 10^{-9}$  &  22   & 56049             \% \\ \hline
+$1 \cdot 10^{-10}$ &  24   & 308059            \% \\ \hline
+$0$                &  300  & $7.99 \cdot 10^8$ \% \\ \hline
+\end{tabular}
+\end{center}
+\caption{Reconstruction error with different values of the regularization parameter $\alpha$.}
+\label{tab:recs}
+\end{table}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=.5]{img/reconstruction.png}
+\includegraphics[scale=.4]{img/reconstruction_large.png}
+\includegraphics[scale=.4]{img/reconstruction_small.png}
+\end{center}
+\caption{Top: The inverse Laplace transform reconstruction of the function with the best regularization parameter. Bottom: Reconstruction with a regularization parameter that is (left) big (right) small.}
+\label{fig:reconstruction}
+\end{figure}
+
+
 The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in figure \ref{fig:laplace}. An example of the synthetic measurement data used in the inversion of the Laplace transform can be seen in the right hand side plot in the same figure.
 
-In the left hand side plot in figure \ref{fig:singular} the singular values are shown for a certain Laplace transform matrix $A$. The matrix is constructed with the vectors $t \in \R^k$ and $s \in \R^n$, with the values $k = 1000$ and $n = 300$. The condition number for the matrix is, as shown in the figure, $\cond(A) \approx 8.6407 \cdot 10^{17}$. In the right hand side plot is shown the condition number for a collection of square Laplace transform matrices. The side of the square matrices in the plot ranges from $1$ to $500$.
+In the left hand side plot in figure \ref{fig:singular} the singular values are shown for a certain Laplace transform matrix $A$. The matrix is constructed with the vectors $t \in \R^k$ and $s \in \R^n$, with the values $k = 1000$ and $n = 300$. The condition number for the matrix is $\cond(A) \approx 8.6407 \cdot 10^{17}$. In the right hand side plot is shown the condition number for a collection of square Laplace transform matrices. The number of rows and columns of the square matrices in the plot ranges from $1$ to $500$.
 
+In table \ref{tab:recs} is shown the relative error of the reconstructions of the function $f$ with different regularization parameters. The parameters for the data and the method of the reconstruction are as described in section \ref{sec:invmethod}. The relative error is calculated with the formula
+\begin{equation}
+\delta_{rel} = \frac{\left\| f - T_{\alpha}(m) \right\|_2}{\left\| f \right\|_2} \cdot 100 \%,
+\end{equation}
+where $f = (f_i)_{i=1}^n$ is the vector of the correct values of the function and $T_{\alpha}(m)$ is the reconstruction calculated from the noisy data $m$ with the regularization parameter $\alpha$.
 
-
+The reconstructions corresponding to the data in the table are shown for some values of the regularization parameter in figure \ref{fig:reconstruction}. In the top most image is shown the reconstruction with the smallest relative error, which was achieved with the value $\alpha = 1 \cdot 10^{-5}$ of the regularization parameter. The two lower most images show the reconstruction with the values $\alpha = 1 \cdot 10^{-2}$ and $\alpha = 1 \cdot 10^{-7}$ of the regularization parameter, in the left and right images, respectively.
 
 
 \section{Discussion}
 
-\subsection{Ill-posedness}
+As it can be seen from the left hand side image in figure \ref{fig:singular}, the singular values of the coefficient matrix are decreasing very rapidly (notice the logarithmic scale on the y-axis). This results in high condition numbers and therefore in systems with high sensibility for noise. As it can further be seen from right hand side image, the condition number greatly increases as the size of the matrix increases (again, notice the logarithmic scale). This clearly points to the fact that the inverse Laplace transform is an ill-posed inverse problem.
 
-As it can be seen from figure \ref{fig:singular}, the singular values of the coefficient matrix are decreasing very rapidly (notice the logarithmic scale on the y-axis). This results in high condition numbers and therefore in systems with high sensibility for noise. As it can further be seen from figure \ref{fig:cond}, the condition number greatly increases as the size of the matrix increases (again, notice the logarithmic scale). These results clearly point to the fact that the inverse Laplace transform is an ill-posed problem.
+From table \ref{tab:recs} we can also see that the naive reconstruction (with the regularization parameter $\alpha = 0$) fails spectacularly. This is also an indication to the fact that we are dealing with an ill-posed inverse problem.
+
+As it can be seen from the relative errors of the reconstructions with different values of regularization parameter, the error decreases at first, but then again increases after hitting a lowest error at $\alpha = 1 \cdot 10^{-5}$. From figure \ref{fig:reconstruction} we can see what happens with different values of the regularization parameter.
+
+As the parameter is big, as $\alpha = 1 \cdot 10^{-2}$ in the bottom left image in figure \ref{fig:reconstruction}, the reconstruction has not quite achieved the shape of the function, but it is rather much like a smoothed version of the function. This is due to the fact, that with a big value of $\alpha$ many singular values are discarded from the matrix, and information about the measurements is lost.
+
+With a small parameter, as in the bottom right image of figure \ref{fig:reconstruction}, where $\alpha = 1 \cdot 10^{-7}$, the small singular values of the coefficient matrix amplify the noise from the measurements. Therefore the reconstruction gets more and more oscillatory as the parameter gets smaller, and the relative error of the reconstruction increases rapidly.
+
 
 
 \newpage
