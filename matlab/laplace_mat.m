@@ -10,10 +10,12 @@
 % Author: Lasse Lybeck
 function [A, f] = laplace_mat(s, t)
 
+s = s(:);
+t = t(:);
+
 k = length(t);
 f = f_eval(t);
 
-s = s(:);
 A = zeros(length(s), k);
 
 maxt = t(k);
