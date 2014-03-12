@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amsfonts,amsthm}
 \usepackage{graphicx}
+\usepackage{url}
 
 \newcommand{\R}{{\mathbb R}}
 \newcommand{\C}{{\mathbb C}}
@@ -30,7 +31,7 @@ Let $f:[0,\infty)\rightarrow \R$. The Laplace transform $F$ of $f$ is defined by
 \end{equation}
 provided that the integral converges.
 
-The transform has many applications in physical sciences and is therefore widely used and studied. One example of the usage of the transform is in linear differential equations, which may in some cases be easily solved using the Laplace transform.
+The Laplace transform has many applications in physical sciences and is therefore widely used and studied. One example of the usage of the transform is in differential equations, which may in some cases easily be solved using the Laplace transform. These kinds of equations appear in many problems, including electric circuit theory and harmonic vibrations of beams. \cite{laplaceweb} \cite{transformsbook}
 
 The direct problem is to determine $F$ for a given function $f$ according to (\ref{laplace}). The inverse problem is: {\em given a Laplace transform $F$, find the corresponding function $f$.} In this study we will be looking at the inverse problem from the computational point of view. We will notice that the inverse problem is ill-posed and not at all trivial.
 
@@ -230,9 +231,16 @@ With a small parameter, as in the bottom right image of figure \ref{fig:reconstr
 \newpage
 \begin{thebibliography}{9}
 
+\bibitem{laplaceweb}
+Adhikari, S. (2008). Laplace transforms and its applications. Available: \url{http://sces.phys.utk.edu/~moreo/mm08/sarina.pdf}. Last accessed 12th Mar 2013.
+
 \bibitem{samu}
-Mueller, Jennifer L., ; Siltanen, Samuli \\
-\emph{Linear and nonlinear inverse problems with practical applications} \\ Philadelphia : SIAM, 2012. - (Computational science \& engineering.)
+Mueller, Jennifer L., ; Siltanen, Samuli (2012)
+\emph{Linear and nonlinear inverse problems with practical applications} : SIAM
+
+\bibitem{transformsbook}
+Poularikas A. (2012). Chapter 5, \emph{Laplace transforms} in \emph{Transforms and Applications Handbook, Third Edition} (Electrical Engineering Handbook) : CRC Press
+
 
 \end{thebibliography}
 
