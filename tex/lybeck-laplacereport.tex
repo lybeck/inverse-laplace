@@ -31,7 +31,7 @@ Let $f:[0,\infty)\rightarrow \R$. The Laplace transform $F$ of $f$ is defined by
 \end{equation}
 provided that the integral converges.
 
-The Laplace transform has many applications in physical sciences and is therefore widely used and studied. One example of the usage of the transform is in differential equations, which may in some cases easily be solved using the Laplace transform. These kinds of equations appear in many problems, including electric circuit theory and harmonic vibrations of beams. \cite{laplaceweb} \cite{transformsbook}
+The Laplace transform has many applications in mathematics, physics and engineering and is therefore widely used and studied. One example of the usage of the transform is in differential equations, which may in some cases easily be solved using the Laplace transform. These kinds of equations appear in many problems, including electric circuit theory and harmonic vibrations of beams. \cite{laplaceweb} \cite{transformsbook}
 
 The direct problem is to determine $F$ for a given function $f$ according to (\ref{laplace}). The inverse problem is: {\em given a Laplace transform $F$, find the corresponding function $f$.} In this study we will be looking at the inverse problem from the computational point of view. We will notice that the inverse problem is ill-posed and not at all trivial.
 
@@ -42,7 +42,9 @@ The direct problem is to determine $F$ for a given function $f$ according to (\r
 
 \subsection{Theoretical basis}
 
-In this study we will solve the inverse problem with the \emph{truncated singular value decomposition} method. In the future we will refer to the singular value decomposition as SVD. Let us first revise the theory for the SVD and the pseudoinverse.
+In this study we will solve the inverse problem with the \emph{truncated singular value decomposition} method. In the future we will refer to the singular value decomposition as SVD.
+
+In this section we will briefly present the central results for the SVD and the truncated SVD without going into further detail or proofs. For further reading, see \cite{samu}, chapters 3.5 to 4.2. Let us first revise the theory for the SVD and the pseudoinverse.
 
 \subsubsection{Singular value decomposition and the pseudoinverse}
 \label{sec:svd}
@@ -51,7 +53,7 @@ The truncated SVD method is based on the fact that every matrix $A \in \R^{k \ti
 \begin{equation}
 A = U D V^T,
 \end{equation}
-where $U$ and $V$ are orthogonal matrices and $D$ is a diagonal matrix. The diagonal elements $d_{i,i}$, $i = 1, \ldots , \min \left\{ k,n \right\}$ of $D$ are called the \emph{singular values of $D$}.
+where $U$ and $V$ are orthogonal matrices and $D$ is a diagonal matrix. The diagonal elements $d_{i,i}$, $i = 1, \ldots , \min \left\{ k,n \right\}$ of $D$ are called the \emph{singular values of $D$}. Here $d_{i,i} \geq d_{j,j}$, when $i < j$.
 
 The \emph{pseudoinverse} of $A$ (denoted as $A^+$) can be calculated via the SVD of $A$. We define the pseudoinverse of the diagonal matrix $D \in \R^{k \times n}$ as the diagonal matrix $D^+ \in \R^{n \times k}$ where the diagonal elements have the values
 \begin{equation}
@@ -68,7 +70,7 @@ A^+ = V D^+ U^T .
 
 It can be shown, that if $A$ is an invertible matrix, then $A^+ = A^{-1}$. This is however often not the case.
 
-In the case of linear systems $Af = m$ we get the least squares solution easily with the pseudo inverse of $A$. As it is shown in \cite{samu}, theorem 4.1, the least squares solution to a system $Af = m$, where $A \in \R^{k \times n}$, is given by $A^+ m$. Notice that here $A$ need not be invertible, as it may not even be a square matrix.
+In the case of linear systems we get the least squares solution easily with the pseudoinverse of $A$. As it is shown in \cite{samu}, theorem 4.1, the least squares solution of the equation $Af = m$, where $A \in \R^{k \times n}$, is given by $A^+ m$. Notice that here $A$ need not be invertible, as it may not even be a square matrix.
 
 \subsubsection{Truncated singular value decomposition}
 
@@ -78,7 +80,7 @@ Let $m = A f + \eps$, where $\eps$ is some small random noise. It would seem log
 
 The condition number of a matrix $A \in \R^{k \times n}$ is defined as the ratio of the largest and smallest singular of $A$. In the case $A$ has an SVD as described in section \ref{sec:svd}, the condition number is defined as $\cond(A) = d_1 / d_{\min(k,n)}$.
 
-In the case of ill-posed inverse problems the condition numbers are large and grow as the size of the matrix grows. This is the reason why naive inversion fails for these problems. As the condition number is large, the least singular values are correspondingly very small. This means that for the pseudoinverse $A^+$ the singular values are very large. As we try to calculate the least squares solution with the naive inversion the right side of the equation becomes $A^+ (Af + \eps)$, where we multiply $A^+$ with the noise $\eps$. This leads to a large error, even thou the noise is quite small, as the inverse singular values are often very much larger. This is the reason why naive inversion fails for ill-posed inverse problems.
+In the case of ill-posed inverse problems the condition numbers are large and grow as the size of the matrix grows. As the condition number is large, the least singular values are correspondingly very small. This means that for the pseudoinverse $A^+$ the singular values are very large. As we try to calculate the least squares solution with the naive inversion the right side of the equation becomes $A^+ (Af + \eps)$, where we multiply $A^+$ with the noise $\eps$. This leads to a large error, even thou the noise is quite small, as the inverse singular values are often much larger. This is the reason why naive inversion fails for ill-posed inverse problems.
 
 The truncated SVD is a method that tries to solve this problem by "discarding" the singular values that are regarded as too small. For a \emph{regularization parameter} $\alpha > 0$, the truncated SVD for a matrix $A \in \R^{k \times n}$ in defined in the means of the SVD $A = U D V^T$ as $A_{\alpha} = U D_{\alpha} V^T$, where
 \begin{equation}
@@ -93,7 +95,7 @@ Now the least singular value of $A_{\alpha}$ is no smaller that $\alpha$, and th
 \begin{equation}
 T_{\alpha}(m) = A_{\alpha}^+ m = V D_{\alpha} U^T m.
 \end{equation}
-This reconstruction model will be used in this study to solve the inverse Laplace transform. For further reading on truncated SVD, see \cite{samu}, chapter 4.2.
+This reconstruction model will be used in this study to solve the inverse Laplace transform.
 
 
 
@@ -131,7 +133,6 @@ f(t) =
 0, & \text{otherwise}.
 \end{cases}
 \end{equation}
-
 The matrix $A$ and vectors $s$ and $t$ are defined as explained in section \ref{sec:matrixmodel}. The values of $s_i$ of the vector $s \in \R^n$ and $t_j$ of the vector $t \in \R^k$ were chosen evenly spaced from the intervals $\left] 0, 100 \right[$ and $\left[ 0,3 \right]$, respectively. The values of $n$ and $k$ were varied in the experiments to determine their effect on the condition of the coefficient matrix. In the recorded reconstructions the values were $n = 300$ and $k = 1000$.
 
 With the specified function $f$ the Laplace transform can be calculated as
@@ -201,30 +202,30 @@ $0$                &  300  & $7.99 \cdot 10^8$ \% \\ \hline
 \end{figure}
 
 
-The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in figure \ref{fig:laplace}. An example of the synthetic measurement data used in the inversion of the Laplace transform can be seen in the right hand side plot in the same figure.
+The Laplace transform of the function $f$ defined in \eqref{eq:f} is shown in the left hand side graph in figure \ref{fig:laplace}. An example of the synthetic measurement data used in the inversion of the Laplace transform can be seen in the right hand side graph in the same figure.
 
-In the left hand side plot in figure \ref{fig:singular} the singular values are shown for a certain Laplace transform matrix $A$. The matrix is constructed with the vectors $t \in \R^k$ and $s \in \R^n$, with the values $k = 1000$ and $n = 300$. The condition number for the matrix is $\cond(A) \approx 8.6407 \cdot 10^{17}$. In the right hand side plot is shown the condition number for a collection of square Laplace transform matrices. The number of rows and columns of the square matrices in the plot ranges from $1$ to $500$.
+In the left hand side graph in figure \ref{fig:singular} the singular values are shown for a certain coefficient matrix $A$, defined as in \eqref{LaplaceA}. The matrix is constructed with the vectors $t \in \R^k$ and $s \in \R^n$, with the values $k = 1000$ and $n = 300$. The condition number for the matrix is $\cond(A) \approx 8.6407 \cdot 10^{17}$. In the right hand side graph is shown the condition number for a collection of square matrices of the same type. The number of rows and columns of the square matrices in the graph ranges from $1$ to $500$.
 
 In table \ref{tab:recs} is shown the relative error of the reconstructions of the function $f$ with different regularization parameters. The parameters for the data and the method of the reconstruction are as described in section \ref{sec:invmethod}. The relative error is calculated with the formula
 \begin{equation}
-\delta_{rel} = \frac{\left\| f - T_{\alpha}(m) \right\|_2}{\left\| f \right\|_2} \cdot 100 \%,
+\delta_{rel} = \frac{\left\| \bar{f} - T_{\alpha}(m) \right\|_2}{\left\| \bar{f} \right\|_2} \cdot 100 \%,
 \end{equation}
-where $f = (f_i)_{i=1}^n$ is the vector of the correct values of the function and $T_{\alpha}(m)$ is the reconstruction calculated from the noisy data $m$ with the regularization parameter $\alpha$.
+where $\bar{f}$ is the vector containing the function values $\bar{f} = \left( f(t_i) \right)_{i=1}^k$ and $T_{\alpha}(m)$ is the reconstruction calculated from the noisy data $m$ with the regularization parameter $\alpha$.
 
-The reconstructions corresponding to the data in the table are shown for some values of the regularization parameter in figure \ref{fig:reconstruction}. In the top most image is shown the reconstruction with the smallest relative error, which was achieved with the value $\alpha = 1 \cdot 10^{-5}$ of the regularization parameter. The two lower most images show the reconstruction with the values $\alpha = 1 \cdot 10^{-2}$ and $\alpha = 1 \cdot 10^{-7}$ of the regularization parameter, in the left and right images, respectively.
+The reconstructions for some values of the regularization parameter are shown in figure \ref{fig:reconstruction}. In the top most graph is shown the reconstruction with the smallest relative error, which was achieved with the value $\alpha = 1 \cdot 10^{-5}$ of the regularization parameter. The two lower most graphs show the reconstruction with the values $\alpha = 1 \cdot 10^{-2}$ and $\alpha = 1 \cdot 10^{-7}$, in the left and right graphs, respectively.
 
 
 \section{Discussion}
 
-As it can be seen from the left hand side image in figure \ref{fig:singular}, the singular values of the coefficient matrix are decreasing very rapidly (notice the logarithmic scale on the y-axis). This results in high condition numbers and therefore in systems with high sensibility for noise. As it can further be seen from right hand side image, the condition number greatly increases as the size of the matrix increases (again, notice the logarithmic scale). This clearly points to the fact that the inverse Laplace transform is an ill-posed inverse problem.
+As it can be seen from the left hand side graph in figure \ref{fig:singular}, the singular values of the coefficient matrix are decreasing very rapidly (notice the logarithmic scale on the y-axis). This results in a high condition number and therefore in a system with high sensibility for noise. As it can further be seen from right hand side graph, the condition number greatly increases as the size of the matrix increases (again, notice the logarithmic scale). This clearly points to the fact that the inverse Laplace transform is an ill-posed inverse problem.
 
 From table \ref{tab:recs} we can also see that the naive reconstruction (with the regularization parameter $\alpha = 0$) fails spectacularly. This is also an indication to the fact that we are dealing with an ill-posed inverse problem.
 
 As it can be seen from the relative errors of the reconstructions with different values of regularization parameter, the error decreases at first, but then again increases after hitting a lowest error at $\alpha = 1 \cdot 10^{-5}$. From figure \ref{fig:reconstruction} we can see what happens with different values of the regularization parameter.
 
-As the parameter is big, as $\alpha = 1 \cdot 10^{-2}$ in the bottom left image in figure \ref{fig:reconstruction}, the reconstruction has not quite achieved the shape of the function, but it is rather much like a smoothed version of the function. This is due to the fact, that with a big value of $\alpha$ many singular values are discarded from the matrix, and information about the measurements is lost.
+As the parameter is big, as $\alpha = 1 \cdot 10^{-2}$ in the bottom left graph in figure \ref{fig:reconstruction}, the reconstruction has not achieved the shape of the function, but it is rather much like a smoothed version of it. This is due to the fact, that with a big value of $\alpha$ many singular values are discarded from the matrix, and information about the measurements is lost.
 
-With a small parameter, as in the bottom right image of figure \ref{fig:reconstruction}, where $\alpha = 1 \cdot 10^{-7}$, the small singular values of the coefficient matrix amplify the noise from the measurements. Therefore the reconstruction gets more and more oscillatory as the parameter gets smaller, and the relative error of the reconstruction increases rapidly.
+With a small parameter, as in the bottom right graph of figure \ref{fig:reconstruction}, where $\alpha = 1 \cdot 10^{-7}$, the small singular values of the coefficient matrix amplify the noise from the measurements. Therefore the reconstruction gets more and more oscillatory as the parameter gets smaller, and the relative error of the reconstruction increases rapidly.
 
 
 
